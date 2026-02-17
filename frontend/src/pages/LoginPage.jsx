@@ -13,6 +13,11 @@ const LoginPage = () => {
   });
   const { login, isLoggingIn } = useAuthStore();
 
+  const API_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001"
+    : "";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(formData);
@@ -106,7 +111,7 @@ const LoginPage = () => {
             </button>
 
             <a
-              href="http://localhost:5001/api/oauth/google/login"
+              href={`${API_URL}/api/oauth/google/login`}
               className="btn btn-primary w-full flex items-center justify-center gap-2 mt-4"
             >
               <img

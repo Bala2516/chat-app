@@ -10,7 +10,7 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import google from "../asserts/google.png"
+import google from "../asserts/google.png";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
@@ -24,6 +24,9 @@ const SignUpPage = () => {
   });
 
   const { signup, isSigningUp } = useAuthStore();
+
+  const API_URL =
+    import.meta.env.MODE === "development" ? "http://localhost:5001" : "";
 
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required");
@@ -156,15 +159,14 @@ const SignUpPage = () => {
               type="button"
               className="btn btn-primary w-full"
               onClick={() =>
-                window.open("http://localhost:5001/api/oauth/google/signup", "_self")
+                window.open(
+                  `${API_URL}/api/oauth/google/signup`,
+                  "_self",
+                )
               }
               disabled={isSigningUp}
             >
-              <img
-                src={google}
-                alt="Google"
-                className="w-5 h-5"
-              />
+              <img src={google} alt="Google" className="w-5 h-5" />
               Continue with Google
             </button>
           </form>
