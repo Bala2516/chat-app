@@ -23,10 +23,11 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
+app.set("trust proxy", 1);
 
 app.use("/api/oauth",oauthRoutes)
 app.use("/api/auth", authRoutes);
