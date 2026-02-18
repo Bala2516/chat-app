@@ -22,6 +22,14 @@ passport.use(
 
         let user = await User.findOne({ email });
 
+        if (mode === "signup" && user) {
+          return cb(null, false);
+        }
+
+        if (mode === "login" && !user) {
+          return cb(null, false);
+        }
+
         if (!user && mode === "signup") {
           let uploadedPic = null;
 
